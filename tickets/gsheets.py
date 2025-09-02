@@ -5,9 +5,11 @@ from typing import Dict, Any, List
 from django.conf import settings
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
+import logging
+
 
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
-
+logger = logging.getLogger(__name__)
 def _load_sa_info() -> dict:
     """
     Service Account bilgilerini şu sırayla dener:
@@ -16,7 +18,7 @@ def _load_sa_info() -> dict:
     3) GOOGLE_SERVICE_ACCOUNT_FILE      (dosya yolu)
     """
     info_b64 = getattr(settings, "GOOGLE_SERVICE_ACCOUNT_INFO_B64", "").strip()
-    print(info_b64)
+    logger.warning(info_b64)
     if info_b64:
         return json.loads(base64.b64decode(info_b64).decode("utf-8"))
 
