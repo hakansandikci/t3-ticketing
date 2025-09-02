@@ -1,0 +1,303 @@
+{% extends "base.html" %}
+{% block title %}Bilet Talebi Oluştur{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto">
+  <!-- Başlık -->
+  <div class="mb-6">
+    <h1
+      class="text-3xl md:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-red-600 via-orange-500 to-yellow-400 bg-clip-text text-transparent">
+      🎫 Bilet Talebi Oluştur
+    </h1>
+    <p class="text-sm text-gray-600 mt-1">
+      Bilgilerinizi eksiksiz doldurun. Talebiniz için bir <b>takip kodu</b> oluşturulacaktır.
+    </p>
+  </div>
+
+  <!-- Kart -->
+  <div class="bg-white/90 backdrop-blur rounded-2xl shadow-xl border border-gray-200 p-6 md:p-8 animate-fadeIn">
+    <form method="post" class="grid grid-cols-1 md:grid-cols-2 gap-6" id="reqForm">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+
+      <!-- Kullanıcı türü -->
+      <div class="flex flex-col">
+        <label for="{{ form.user_type.id_for_label }}" class="form-label">Kullanıcı Türü</label>
+        {{ form.user_type }}
+        {% if form.user_type.errors %}<p class="form-error">{{ form.user_type.errors|join:", " }}</p>{% endif %}
+      </div>
+
+      <!-- Ulaşım türü -->
+      <div class="flex flex-col">
+        <label for="{{ form.transport.id_for_label }}" class="form-label">Ulaşım Türü</label>
+        {{ form.transport }}
+        {% if form.transport.errors %}<p class="form-error">{{ form.transport.errors|join:", " }}</p>{% endif %}
+      </div>
+
+      <!-- Havayolu Tercihi (yalnız uçak için göster) -->
+      <div class="flex flex-col hidden" id="airlineBox">
+        <label for="{{ form.preferred_airline.id_for_label }}" class="form-label">
+        Tercih Edilen Havayolu (opsiyonel)</label>
+        {{ form.preferred_airline }}
+      </div>
+
+      <!-- Ad Soyad -->
+      <div class="flex flex-col">
+        <label for="{{ form.full_name.id_for_label }}" class="form-label">Ad Soyad</label>
+        {{ form.full_name }}
+        {% if form.full_name.errors %}<p class="form-error">{{ form.full_name.errors|join:", " }}</p>{% endif %}
+      </div>
+
+      <!-- T.C. -->
+      <div class="flex flex-col">
+        <label for="{{ form.tc_no.id_for_label }}" class="form-label">T.C. Kimlik No</label>
+        {{ form.tc_no }}
+        {% if form.tc_no.errors %}<p class="form-error">{{ form.tc_no.errors|join:", " }}</p>{% endif %}
+      </div>
+
+      <!-- Telefon -->
+      <div class="flex flex-col">
+        <label for="{{ form.phone.id_for_label }}" class="form-label">Telefon</label>
+        {{ form.phone }}
+        {% if form.phone.errors %}<p class="form-error">{{ form.phone.errors|join:", " }}</p>{% endif %}
+      </div>
+
+      <!-- Nereden -->
+      <div class="flex flex-col">
+        <label for="{{ form.origin.id_for_label }}" class="form-label">Nereden</label>
+        {{ form.origin }}
+        {% if form.origin.errors %}<p class="form-error">{{ form.origin.errors|join:", " }}</p>{% endif %}
+      </div>
+
+      <!-- Nereye -->
+      <div class="flex flex-col">
+        <label for="{{ form.destination.id_for_label }}" class="form-label">Nereye</label>
+        {{ form.destination }}
+        {% if form.destination.errors %}<p class="form-error">{{ form.destination.errors|join:", " }}</p>{% endif %}
+      </div>
+
+      <!-- Gidiş Tarihi -->
+      <div class="flex flex-col">
+        <label for="{{ form.travel_date.id_for_label }}" class="form-label">Gidiş Tarihi</label>
+        {{ form.travel_date }}
+        {% if form.travel_date.errors %}<p class="form-error">{{ form.travel_date.errors|join:", " }}</p>{% endif %}
+      </div>
+
+      <!-- Gidiş Saati (opsiyonel) -->
+      <div class="flex flex-col">
+        <label for="{{ form.departure_time.id_for_label }}" class="form-label">Gidiş Saati (opsiyonel)</label>
+        {{ form.departure_time }}
+        {% if form.departure_time.errors %}<p class="form-error">{{ form.departure_time.errors|join:", " }}</p>{% endif %}
+      </div>
+
+      <!-- Dönüş Yeri (opsiyonel) -->
+      <div class="flex flex-col">
+        <label for="{{ form.return_destination.id_for_label }}" class="form-label">Dönüş Yeri (opsiyonel)</label>
+        {{ form.return_destination }}
+        {% if form.return_destination.errors %}<p class="form-error">{{ form.return_destination.errors|join:", " }}</p>{% endif %}
+      </div>
+
+      <!-- Dönüş Tarihi (opsiyonel) -->
+      <div class="flex flex-col">
+        <label for="{{ form.return_date.id_for_label }}" class="form-label">Dönüş Tarihi (opsiyonel)</label>
+        {{ form.return_date }}
+        {% if form.return_date.errors %}<p class="form-error">{{ form.return_date.errors|join:", " }}</p>{% endif %}
+      </div>
+
+      <!-- Dönüş Saati (opsiyonel) -->
+      <div class="flex flex-col">
+        <label for="{{ form.return_time.id_for_label }}" class="form-label">Dönüş Saati (opsiyonel)</label>
+        {{ form.return_time }}
+        {% if form.return_time.errors %}<p class="form-error">{{ form.return_time.errors|join:", " }}</p>{% endif %}
+      </div>
+
+      <!-- Talep Nedeni -->
+      <div class="flex flex-col">
+        <label for="{{ form.reason.id_for_label }}" class="form-label">Seyahat Talep Nedeni</label>
+        {{ form.reason }}
+        {% if form.reason.errors %}<p class="form-error">{{ form.reason.errors|join:", " }}</p>{% endif %}
+      </div>
+
+      <!-- Diğer Açıklama (yalnızca 'diger' iken) -->
+      <div class="md:col-span-2 flex flex-col {% if form.reason.value != 'diger' %}hidden{% endif %}" id="otherReasonBox">
+        <label for="{{ form.reason_other.id_for_label }}" class="form-label">Diğer Açıklama</label>
+        {{ form.reason_other }}
+        {% if form.reason_other.errors %}<p class="form-error">{{ form.reason_other.errors|join:", " }}</p>{% endif %}
+        <p class="text-xs text-gray-500 mt-1">“Diğer” seçtiyseniz bu alan zorunludur.</p>
+      </div>
+
+      <!-- Havayolu Tercihi (yalnız uçak için göster) -->
+      <div class="flex flex-col {% if form.transport.value != 'plane' %}hidden{% endif %}" id="airlineBox">
+        <label for="{{ form.preferred_airline.id_for_label }}" class="form-label">Tercih Edilen Havayolu (opsiyonel)</label>
+        {{ form.preferred_airline }}
+        {% if form.preferred_airline.errors %}<p class="form-error">{{ form.preferred_airline.errors|join:", " }}</p>{% endif %}
+      </div>
+
+      <!-- Notlar -->
+      <div class="md:col-span-2 flex flex-col">
+        <label for="{{ form.notes.id_for_label }}" class="form-label">Notlar</label>
+        {{ form.notes }}
+        {% if form.notes.errors %}<p class="form-error">{{ form.notes.errors|join:", " }}</p>{% endif %}
+      </div>
+
+      <!-- Gönder -->
+      <div class="md:col-span-2 flex justify-end gap-3">
+        <a href="/" class="btn-secondary">İptal</a>
+        <button type="submit" class="btn-primary">
+          Talep Oluştur
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Takip kodu başarı popup'ı -->
+{% if tracking_code %}
+  <div id="trackingModal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 animate-pop">
+    <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full text-center">
+      <h2 class="text-2xl font-bold text-green-600 mb-3">✅ Talep Alındı</h2>
+      <p class="text-gray-700 mb-2">Takip Kodunuz:</p>
+
+      <div class="flex items-center justify-between bg-gray-100 border rounded-lg px-4 py-2 mb-4">
+        <code id="trackingCode" class="font-mono text-lg text-gray-800">{{ tracking_code }}</code>
+        <button type="button" onclick="copyCode()" 
+          class="ml-3 px-3 py-1.5 rounded bg-gradient-to-r from-red-600 via-orange-500 to-yellow-400 text-white text-sm hover:scale-105 transition">
+          Kopyala
+        </button>
+      </div>
+
+      <p class="text-sm text-gray-700 mb-6">
+        ⚠️ <b>Önemli:</b> Bu kodla talebinizin durumunu görüntülersiniz. Lütfen <b>kopyalayın</b> ve <b>kaydedin</b>.
+      </p>
+
+      <div class="flex items-center justify-center gap-2">
+        <a href="{% url 'tickets:status_detail' tracking_code=tracking_code %}"
+           class="px-4 py-2.5 rounded-lg bg-indigo-600 text-white font-semibold hover:bg-indigo-700 transition">
+          Durumu Görüntüle
+        </a>
+        <button type="button" onclick="closeModal()" 
+          class="px-4 py-2.5 rounded-lg bg-gray-100 text-gray-700 border border-gray-200 hover:bg-gray-200 transition">
+          Tamam
+        </button>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+<!-- Stil: modern form alanları, odak ve animasyon -->
+<style>
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(12px);} to { opacity: 1; transform: translateY(0);} }
+  .animate-fadeIn { animation: fadeIn 420ms ease-out; }
+
+  @keyframes pop { from { opacity: 0; transform: scale(0.96);} to { opacity: 1; transform: scale(1);} }
+  .animate-pop { animation: pop .22s ease-out; }
+
+  .form-label { font-size: .9rem; font-weight: 600; color: #374151; margin-bottom: .35rem; }
+
+  input, select, textarea {
+    border: 1px solid #d1d5db; border-radius: .65rem; padding: .6rem .8rem; background: #fff;
+    outline: none; transition: border-color .2s, box-shadow .2s, transform .08s; font-size: .95rem;
+  }
+  input:hover, select:hover, textarea:hover { border-color: #c5c9d3; }
+  input:focus, select:focus, textarea:focus { border-color: #ef4444; box-shadow: 0 0 0 4px rgba(239,68,68,.20); }
+
+  .form-error { margin-top: .35rem; font-size: .78rem; color: #dc2626; }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+    padding: .75rem 1.25rem; font-weight: 700; color: #fff; border-radius: .75rem;
+    background-image: linear-gradient(90deg, #dc2626 0%, #f97316 55%, #f59e0b 100%);
+    box-shadow: 0 10px 20px rgba(249,115,22,.25);
+    transition: transform .15s ease, box-shadow .2s ease, filter .2s ease;
+  }
+  .btn-primary:hover { transform: translateY(-1px) scale(1.02); filter: brightness(1.02); }
+  .btn-primary:active { transform: translateY(0px) scale(0.99); }
+
+  .btn-secondary {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: .75rem 1.1rem; font-weight: 600; color: #374151;
+    background: #f3f4f6; border: 1px solid #e5e7eb; border-radius: .75rem;
+    transition: background .2s, color .2s, border-color .2s;
+  }
+  .btn-secondary:hover { background: #eef0f4; border-color: #e5e7eb; }
+</style>
+
+<!-- JS: koşullu alanlar + kopyalama & modal kapatma -->
+<script>
+  (function () {
+    // Elemanlar
+    const transport = document.getElementById("{{ form.transport.id_for_label }}") || document.querySelector('[name="{{ form.transport.html_name }}"]');
+    const airlineBox = document.getElementById("airlineBox");
+
+    const reason = document.getElementById("{{ form.reason.id_for_label }}") || document.querySelector('[name="{{ form.reason.html_name }}"]');
+    const otherBox = document.getElementById("otherReasonBox");
+
+    // Havayolu: sadece 'plane' iken göster
+    function toggleAirline() {
+      if (!transport || !airlineBox) return;
+      airlineBox.classList.toggle('hidden', transport.value !== 'plane');
+    }
+
+    // Diğer açıklama: sadece 'diger' iken göster
+    function toggleOther() {
+      if (!reason || !otherBox) return;
+      otherBox.classList.toggle('hidden', reason.value !== 'diger');
+    }
+
+    // Tarihler için min = bugün (opsiyonel UX)
+    const today = new Date().toISOString().split('T')[0];
+    const start = document.getElementById("{{ form.travel_date.id_for_label }}") || document.querySelector('[name="{{ form.travel_date.html_name }}"]');
+    if (start) start.setAttribute('min', today);
+    const ret = document.getElementById("{{ form.return_date.id_for_label }}") || document.querySelector('[name="{{ form.return_date.html_name }}"]');
+    if (ret) ret.setAttribute('min', today);
+
+    // İlk yükleme
+    toggleAirline();
+    toggleOther();
+
+    // Olaylar
+    if (transport) transport.addEventListener('change', toggleAirline);
+    if (reason) reason.addEventListener('change', toggleOther);
+  })();
+
+  function copyCode() {
+    const text = document.getElementById("trackingCode").textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      alert("Takip kodu kopyalandı: " + text);
+    }).catch(() => {
+      const el = document.createElement('textarea');
+      el.value = text; document.body.appendChild(el);
+      el.select(); document.execCommand('copy'); document.body.removeChild(el);
+      alert("Takip kodu kopyalandı: " + text);
+    });
+  }
+  function closeModal() {
+    const modal = document.getElementById("trackingModal");
+    if (modal) modal.remove();
+  }
+</script>
+
+<script>
+  (function () {
+    // Ulaşım ve havayolu kutuları
+    const transport = document.getElementById("{{ form.transport.id_for_label }}")
+                    || document.querySelector('[name="{{ form.transport.html_name }}"]');
+    const airlineBox = document.getElementById("airlineBox");
+
+    function toggleAirline() {
+      if (!transport || !airlineBox) return;
+      const show = transport.value === 'plane';
+      airlineBox.classList.toggle('hidden', !show);
+      if (!show) {
+        // Uçak değilse seçimi temizle
+        const airlineSelect = airlineBox.querySelector('select');
+        if (airlineSelect) airlineSelect.value = "";
+      }
+    }
+
+    // İlk yükleme + değişiklikte çalıştır
+    toggleAirline();
+    if (transport) transport.addEventListener('change', toggleAirline);
+  })();
+</script>
+{% endblock %}

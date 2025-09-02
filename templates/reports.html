@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="text-2xl font-semibold mb-4">Raporlar</h1>
+<div class="grid md:grid-cols-3 gap-4">
+  <div class="bg-white p-4 rounded-2xl shadow">
+    <h3 class="font-semibold mb-2">Duruma Göre</h3>
+    <ul class="space-y-1 text-sm">
+      {% for row in by_status %}
+        <li>{{ row.status }}: <b>{{ row.c }}</b></li>
+      {% empty %}
+        <li>Veri yok</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="bg-white p-4 rounded-2xl shadow">
+    <h3 class="font-semibold mb-2">Ulaşıma Göre</h3>
+    <ul class="space-y-1 text-sm">
+      {% for row in by_transport %}
+        <li>{{ row.transport }}: <b>{{ row.c }}</b></li>
+      {% empty %}
+        <li>Veri yok</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="bg-white p-4 rounded-2xl shadow">
+    <h3 class="font-semibold mb-2">Türe Göre</h3>
+    <ul class="space-y-1 text-sm">
+      {% for row in by_type %}
+        <li>{{ row.user_type }}: <b>{{ row.c }}</b></li>
+      {% empty %}
+        <li>Veri yok</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

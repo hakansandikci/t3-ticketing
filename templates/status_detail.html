@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block title %}Durum Sorgulama{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto">
+  <!-- Başlık -->
+  <div class="mb-6">
+    <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-red-600 via-orange-500 to-yellow-400 bg-clip-text text-transparent">
+      🔎 Talep Durumu
+    </h1>
+    <p class="text-sm text-gray-600 mt-1">
+      Takip kodu: <span class="font-mono font-semibold">{{ ticket.tracking_code }}</span>
+    </p>
+  </div>
+
+  <!-- Özet Kart -->
+  <div class="bg-white/90 backdrop-blur rounded-2xl shadow-xl border border-gray-200 p-6 md:p-8">
+    <div class="grid md:grid-cols-2 gap-4 text-sm">
+      <div><span class="text-gray-500">Ad Soyad:</span> <span class="font-medium">{{ ticket.full_name }}</span></div>
+      <div><span class="text-gray-500">Tür:</span> <span class="font-medium">{{ ticket.get_user_type_display }}</span></div>
+      <div><span class="text-gray-500">Rota:</span> <span class="font-medium">{{ ticket.origin }} → {{ ticket.destination }}</span></div>
+      <div><span class="text-gray-500">Tarih:</span> <span class="font-medium">{{ ticket.travel_date }}</span></div>
+      <div><span class="text-gray-500">Ulaşım:</span> <span class="font-medium">{{ ticket.get_transport_display }}</span></div>
+      <div><span class="text-gray-500">Durum:</span>
+        {% if ticket.status == "pending" %}
+          <span class="inline-flex items-center px-2 py-0.5 text-xs font-semibold rounded-full bg-gray-100 text-gray-700 border border-gray-200">Beklemede</span>
+        {% elif ticket.status == "ticketed" %}
+          <span class="inline-flex items-center px-2 py-0.5 text-xs font-semibold rounded-full bg-green-100 text-green-800 border border-green-200">Bilet Alındı</span>
+        {% elif ticket.status == "rejected" %}
+          <span class="inline-flex items-center px-2 py-0.5 text-xs font-semibold rounded-full bg-red-100 text-red-700 border border-red-200">Bilet Reddedildi</span>
+        {% endif %}
+      </div>
+      {% if ticket.pnr_code %}
+      <div><span class="text-gray-500">PNR:</span> <span class="font-mono font-medium">{{ ticket.pnr_code }}</span></div>
+      {% endif %}
+      {% if ticket.purchased_by %}
+      <div><span class="text-gray-500">Bileti Alan:</span> <span class="font-medium">{% firstof ticket.purchased_by.get_full_name ticket.purchased_by.username %}</span></div>
+      {% endif %}
+      {% if ticket.rejected_by %}
+      <div><span class="text-gray-500">Reddeden:</span> <span class="font-medium">{% firstof ticket.rejected_by.get_full_name ticket.rejected_by.username %}</span></div>
+      {% endif %}
+    </div>
+
+    {% if ticket.status == "rejected" and ticket.rejection_reason %}
+      <div class="mt-4 p-4 rounded-xl bg-red-50 border border-red-200 text-sm text-red-700">
+        <div class="font-semibold mb-1">Red Açıklaması</div>
+        <div class="whitespace-pre-wrap">{{ ticket.rejection_reason }}</div>
+      </div>
+    {% endif %}
+
+    {% if ticket.notes %}
+      <div class="mt-4 p-4 rounded-xl bg-amber-50 border border-amber-200 text-sm text-amber-800">
+        <div class="font-semibold mb-1">Notlar</div>
+        <div class="whitespace-pre-wrap">{{ ticket.notes }}</div>
+      </div>
+    {% endif %}
+  </div>
+
+  <!-- Revize (Değişiklik) Listesi -->
+  <div class="mt-6 bg-white rounded-2xl shadow border border-gray-200 p-6">
+    <div class="flex items-center justify-between mb-3">
+      <h2 class="text-lg font-semibold">Gönderdiğiniz Revizeler</h2>
+      <span class="text-sm text-gray-500">{{ changes|length }} kayıt</span>
+    </div>
+    {% if changes %}
+      <div class="space-y-3">
+        {% for ch in changes %}
+          <div class="p-3 rounded-lg border bg-gray-50">
+            <div class="text-xs text-gray-500 mb-1">{{ ch.created_at|date:"d.m.Y H:i" }}</div>
+            <div class="text-sm text-gray-800 whitespace-pre-wrap">{{ ch.reason }}</div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="text-sm text-gray-500">Herhangi bir revize bulunmuyor.</div>
+    {% endif %}
+  </div>
+
+  <!-- Değişiklik Talebi Formu -->
+  {% if can_change %}
+    <div class="mt-6 bg-white rounded-2xl shadow border border-gray-200 p-6">
+      <h2 class="text-lg font-semibold mb-3">Değişiklik Talebi Oluştur</h2>
+      <form method="post" class="space-y-3">
+        {% csrf_token %}
+        {{ change_form.non_field_errors }}
+        <div>
+          <label class="block text-sm font-medium mb-1" for="{{ change_form.reason.id_for_label }}">Talep Metni</label>
+          {{ change_form.reason }}
+          {% if change_form.reason.errors %}<p class="text-sm text-red-600 mt-1">{{ change_form.reason.errors|join:", " }}</p>{% endif %}
+        </div>
+        <button class="px-4 py-2 rounded-lg bg-gradient-to-r from-red-600 via-orange-500 to-yellow-400 text-white font-medium shadow hover:scale-[1.01] transition">
+          Gönder
+        </button>
+      </form>
+      <p class="text-xs text-gray-500 mt-2">Not: Bilet alındı/redenildiyse revize gönderemezsiniz.</p>
+    </div>
+  {% endif %}
+</div>
+
+<!-- Basit alan stilleri -->
+<style>
+  textarea, input, select {
+    width: 100%;
+    border: 1px solid #d1d5db;
+    border-radius: .75rem;
+    padding: .65rem .85rem;
+    background: #fff;
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+    font-size: .95rem;
+  }
+  textarea:focus, input:focus, select:focus {
+    border-color:#ef4444; box-shadow:0 0 0 4px rgba(239,68,68,.18);
+  }
+</style>
+{% endblock %}

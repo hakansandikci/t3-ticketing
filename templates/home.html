@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="grid md:grid-cols-2 gap-6">
+  <a href="/talep-yeni/" class="p-8 bg-white rounded-2xl shadow hover:shadow-md transition">
+    <h2 class="text-xl font-semibold mb-2">Yeni Bilet Talebi</h2>
+    <p>Ad, soyad, T.C., ulaşım türü ve rota bilgilerinizi girerek talep oluşturun.</p>
+  </a>
+  <a href="/durum/" class="p-8 bg-white rounded-2xl shadow hover:shadow-md transition">
+    <h2 class="text-xl font-semibold mb-2">Talep Durumu Sorgula</h2>
+    <p>Takip kodunuzu girerek PNR ve durumunuzu görüntüleyin.</p>
+  </a>
+</div>
+{% endblock %}

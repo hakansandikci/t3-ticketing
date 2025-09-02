@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}TSV Bilet Sistemi{% endblock %}</title>
+  <!-- Tailwind via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen flex flex-col bg-gradient-to-br from-red-50 via-orange-50 to-yellow-50 text-gray-900">
+
+  <!-- Navbar (TEK) -->
+  <nav class="bg-gradient-to-r from-red-600 via-orange-500 to-yellow-400 text-white shadow-md sticky top-0 z-10">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-center justify-between py-3">
+        <!-- Logo -->
+        <a href="/" class="font-bold text-lg tracking-wide flex items-center gap-2">
+          🎫 Bilet Sistemi
+        </a>
+
+        <!-- Desktop links -->
+        <div class="hidden md:flex items-center gap-6">
+          <a class="text-sm hover:underline" href="/talep-yeni/">Talep Oluştur</a>
+          <a class="text-sm hover:underline" href="/durum/">Durum Sorgula</a>
+          <a class="text-sm hover:underline" href="/panel/">Personel Paneli</a>
+
+          
+        </div>
+
+        <!-- Mobile menu button -->
+        <button id="navToggle" class="md:hidden inline-flex items-center justify-center p-2 rounded hover:bg-white/10 focus:outline-none" aria-label="Menü">
+          ☰
+        </button>
+      </div>
+
+      <!-- Mobile menu -->
+      <div id="mobileMenu" class="md:hidden hidden pb-3">
+        <div class="flex flex-col gap-2">
+          <a class="text-sm hover:underline px-2 py-1" href="/talep-yeni/">Talep Oluştur</a>
+          <a class="text-sm hover:underline px-2 py-1" href="/durum/">Durum Sorgula</a>
+          <a class="text-sm hover:underline px-2 py-1" href="/panel/">Personel Paneli</a>
+          <div class="px-2 pt-1">
+            {% if user.is_authenticated %}
+              <form method="post" action="{% url 'logout' %}" class="inline">
+                {% csrf_token %}
+                <button type="submit" class="text-sm bg-white/10 px-3 py-1.5 rounded hover:bg-white/20 w-full text-left">
+                  Çıkış
+                </button>
+              </form>
+            {% else %}
+              <a class="text-sm bg-white/10 px-3 py-1.5 rounded hover:bg-white/20 inline-block" href="{% url 'login' %}">
+                Giriş
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="flex-1 max-w-6xl mx-auto px-4 py-8 w-full">
+    {% if messages %}
+      <div class="space-y-3 mb-6">
+        {% for m in messages %}
+          <div class="p-4 rounded-xl border shadow-sm
+            {% if m.tags == 'success' %}
+              bg-green-50 border-green-300 text-green-800
+            {% elif m.tags == 'error' %}
+              bg-red-50 border-red-300 text-red-800
+            {% else %}
+              bg-yellow-50 border-yellow-300 text-yellow-800
+            {% endif %}
+          ">
+            {{ m }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gradient-to-r from-red-600 via-orange-500 to-yellow-400 text-white text-center py-6 mt-10 shadow-inner">
+    <p class="text-sm">© 2025 T3 Vakfı - Bilet Yönetim Sistemi</p>
+  </footer>
+
+  <!-- Mini JS: mobile menu toggle -->
+  <script>
+    (function(){
+      const btn = document.getElementById('navToggle');
+      const menu = document.getElementById('mobileMenu');
+      if (!btn || !menu) return;
+      btn.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title %}Personel Girişi{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto w-full">
+  <!-- Başlık -->
+  <div class="mb-6 text-center">
+    <h1 class="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-red-600 via-orange-500 to-yellow-400 bg-clip-text text-transparent">
+      🔐 Personel Girişi
+    </h1>
+    <p class="text-sm text-gray-600 mt-1">Panel erişimi için kullanıcı adı ve şifrenizi giriniz.</p>
+  </div>
+
+  <!-- Kart -->
+  <div class="bg-white/95 backdrop-blur rounded-2xl shadow-xl border border-gray-200 p-6 md:p-8 animate-fadeIn">
+    <form method="post" class="space-y-5">
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+        <div class="p-3 rounded-lg border bg-red-50 border-red-200 text-red-700 text-sm">
+          {{ form.non_field_errors }}
+        </div>
+      {% endif %}
+
+      <!-- Kullanıcı adı -->
+      <div>
+        <label for="{{ form.username.id_for_label }}" class="form-label">Kullanıcı Adı</label>
+        {{ form.username }}
+        {% if form.username.errors %}<p class="form-error">{{ form.username.errors|join:", " }}</p>{% endif %}
+      </div>
+
+      <!-- Şifre + Göster/Gizle -->
+      <div>
+        <label for="{{ form.password.id_for_label }}" class="form-label">Şifre</label>
+        <div class="relative">
+          {{ form.password }}
+          <button type="button" id="togglePass"
+                  class="absolute right-2 top-1/2 -translate-y-1/2 text-xs px-2 py-1 rounded bg-gray-100 border border-gray-200 hover:bg-gray-200">
+            Göster
+          </button>
+        </div>
+        {% if form.password.errors %}<p class="form-error">{{ form.password.errors|join:", " }}</p>{% endif %}
+      </div>
+
+      <!-- next param (koru) -->
+      {% if next %}
+        <input type="hidden" name="next" value="{{ next }}">
+      {% endif %}
+
+      <!-- Butonlar -->
+      <div class="flex items-center justify-between pt-2">
+        <a href="{% url 'password_reset' %}" class="text-sm text-gray-600 hover:underline">Şifremi Unuttum</a>
+        <button type="submit"
+          class="px-5 py-2.5 rounded-lg bg-gradient-to-r from-red-600 via-orange-500 to-yellow-400 text-white font-semibold shadow hover:scale-105 transition">
+          Giriş Yap
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Stil & Animasyon -->
+<style>
+  @keyframes fadeIn { from {opacity:0; transform: translateY(12px);} to {opacity:1; transform: translateY(0);} }
+  .animate-fadeIn { animation: fadeIn .4s ease-out; }
+
+  .form-label {
+    display:block; margin-bottom:.35rem; font-size:.92rem; font-weight:600; color:#374151;
+  }
+  input[type="text"], input[type="password"] {
+    width:100%;
+    border:1px solid #d1d5db;
+    border-radius:.65rem;
+    padding:.6rem .8rem;
+    background:#fff;
+    outline:none;
+    transition:border-color .2s, box-shadow .2s;
+    font-size:.95rem;
+  }
+  input[type="text"]:focus, input[type="password"]:focus {
+    border-color:#ef4444; /* red-500 */
+    box-shadow:0 0 0 4px rgba(239,68,68,.2);
+  }
+  .form-error { margin-top:.35rem; font-size:.78rem; color:#dc2626; }
+</style>
+
+<!-- Küçük JS: Şifre göster/gizle -->
+<script>
+  (function(){
+    const btn = document.getElementById('togglePass');
+    const pass = document.getElementById('{{ form.password.id_for_label }}');
+    if (!btn || !pass) return;
+    btn.addEventListener('click', () => {
+      const isPwd = pass.getAttribute('type') === 'password';
+      pass.setAttribute('type', isPwd ? 'text' : 'password');
+      btn.textContent = isPwd ? 'Gizle' : 'Göster';
+    });
+  })();
+</script>
+{% endblock %}

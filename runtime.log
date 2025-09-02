@@ -1,0 +1,471 @@
+Watching for file changes with StatReloader
+Session data corrupted
+Session data corrupted
+Session data corrupted
+SHEETS -> create_ticket çağrılıyor: FC9D1CC9A008
+Sheet create failed
+Traceback (most recent call last):
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\views.py", line 100, in request_create
+    resp = sheets_api.create_ticket(ticket)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\sheets_api.py", line 120, in create_ticket
+    srv = _service()
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\sheets_api.py", line 56, in _service
+    return build("sheets", "v4", credentials=_creds(), cache_discovery=False)
+                                             ~~~~~~^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\sheets_api.py", line 53, in _creds
+    raise RuntimeError("Service Account bilgisi yok. .env ayarlarını kontrol et.")
+RuntimeError: Service Account bilgisi yok. .env ayarlarını kontrol et.
+Watching for file changes with StatReloader
+Session data corrupted
+Session data corrupted
+Session data corrupted
+SHEETS -> create_ticket çağrılıyor: 0D1712992F8F
+Sheet create failed
+Traceback (most recent call last):
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\views.py", line 100, in request_create
+    resp = sheets_api.create_ticket(ticket)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\sheets_api.py", line 120, in create_ticket
+    srv = _service()
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\sheets_api.py", line 56, in _service
+    return build("sheets", "v4", credentials=_creds(), cache_discovery=False)
+                                             ~~~~~~^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\sheets_api.py", line 53, in _creds
+    raise RuntimeError("Service Account bilgisi yok. .env ayarlarını kontrol et.")
+RuntimeError: Service Account bilgisi yok. .env ayarlarını kontrol et.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Session data corrupted
+SHEETS -> create çağrılıyor: 48CB9139F13E
+Sheet create failed
+Traceback (most recent call last):
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\views.py", line 141, in request_create
+    resp = _sheet_create(ticket)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\views.py", line 37, in _sheet_create
+    return _gs.upsert_ticket(ticket)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 166, in upsert_ticket
+    return upsert_by_tracking(_tickets_sheet(), ticket_to_dict(ticket))
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 87, in upsert_by_tracking
+    headers = get_headers(sheet_name)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 62, in get_headers
+    srv = service()
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 36, in service
+    return build("sheets", "v4", credentials=_creds(), cache_discovery=False)
+                                             ~~~~~~^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 31, in _creds
+    info = _load_sa_info()
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 28, in _load_sa_info
+    raise RuntimeError("Service Account bilgisi bulunamadı. .env ayarlarını kontrol et.")
+RuntimeError: Service Account bilgisi bulunamadı. .env ayarlarını kontrol et.
+Watching for file changes with StatReloader
+Session data corrupted
+SHEETS -> create çağrılıyor: 85E420A7FB87
+Sheet create failed
+Traceback (most recent call last):
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\views.py", line 141, in request_create
+    resp = _sheet_create(ticket)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\views.py", line 37, in _sheet_create
+    return _gs.upsert_ticket(ticket)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 166, in upsert_ticket
+    return upsert_by_tracking(_tickets_sheet(), ticket_to_dict(ticket))
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 87, in upsert_by_tracking
+    headers = get_headers(sheet_name)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 62, in get_headers
+    srv = service()
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 36, in service
+    return build("sheets", "v4", credentials=_creds(), cache_discovery=False)
+                                             ~~~~~~^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 31, in _creds
+    info = _load_sa_info()
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 28, in _load_sa_info
+    raise RuntimeError("Service Account bilgisi bulunamadı. .env ayarlarını kontrol et.")
+RuntimeError: Service Account bilgisi bulunamadı. .env ayarlarını kontrol et.
+Watching for file changes with StatReloader
+Session data corrupted
+SHEETS -> create çağrılıyor: D0F48ED121F1
+Sheet create failed
+Traceback (most recent call last):
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\views.py", line 141, in request_create
+    resp = _sheet_create(ticket)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\views.py", line 37, in _sheet_create
+    return _gs.upsert_ticket(ticket)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 166, in upsert_ticket
+    return upsert_by_tracking(_tickets_sheet(), ticket_to_dict(ticket))
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 87, in upsert_by_tracking
+    headers = get_headers(sheet_name)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 62, in get_headers
+    srv = service()
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 36, in service
+    return build("sheets", "v4", credentials=_creds(), cache_discovery=False)
+                                             ~~~~~~^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 31, in _creds
+    info = _load_sa_info()
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 28, in _load_sa_info
+    raise RuntimeError("Service Account bilgisi bulunamadı. .env ayarlarını kontrol et.")
+RuntimeError: Service Account bilgisi bulunamadı. .env ayarlarını kontrol et.
+Session data corrupted
+SHEETS -> create çağrılıyor: CF1B16E197F6
+Sheet create failed
+Traceback (most recent call last):
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\views.py", line 141, in request_create
+    resp = _sheet_create(ticket)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\views.py", line 37, in _sheet_create
+    return _gs.upsert_ticket(ticket)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 166, in upsert_ticket
+    return upsert_by_tracking(_tickets_sheet(), ticket_to_dict(ticket))
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 87, in upsert_by_tracking
+    headers = get_headers(sheet_name)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 62, in get_headers
+    srv = service()
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 36, in service
+    return build("sheets", "v4", credentials=_creds(), cache_discovery=False)
+                                             ~~~~~~^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 31, in _creds
+    info = _load_sa_info()
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 28, in _load_sa_info
+    raise RuntimeError("Service Account bilgisi bulunamadı. .env ayarlarını kontrol et.")
+RuntimeError: Service Account bilgisi bulunamadı. .env ayarlarını kontrol et.
+C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py changed, reloading.
+Watching for file changes with StatReloader
+Session data corrupted
+SHEETS -> create çağrılıyor: DEAD3F2BA92F
+Sheet create failed
+Traceback (most recent call last):
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\views.py", line 141, in request_create
+    resp = _sheet_create(ticket)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\views.py", line 37, in _sheet_create
+    return _gs.upsert_ticket(ticket)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 167, in upsert_ticket
+    return upsert_by_tracking(_tickets_sheet(), ticket_to_dict(ticket))
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 88, in upsert_by_tracking
+    headers = get_headers(sheet_name)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 63, in get_headers
+    srv = service()
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 37, in service
+    return build("sheets", "v4", credentials=_creds(), cache_discovery=False)
+                                             ~~~~~~^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 32, in _creds
+    info = _load_sa_info()
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 29, in _load_sa_info
+    raise RuntimeError("Service Account bilgisi bulunamadı. .env ayarlarını kontrol et.")
+RuntimeError: Service Account bilgisi bulunamadı. .env ayarlarını kontrol et.
+C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py changed, reloading.
+Watching for file changes with StatReloader
+Session data corrupted
+SHEETS -> create çağrılıyor: BBA53AF5FADE
+Sheet create failed
+Traceback (most recent call last):
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\views.py", line 141, in request_create
+    resp = _sheet_create(ticket)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\views.py", line 37, in _sheet_create
+    return _gs.upsert_ticket(ticket)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 167, in upsert_ticket
+    return upsert_by_tracking(_tickets_sheet(), ticket_to_dict(ticket))
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 88, in upsert_by_tracking
+    headers = get_headers(sheet_name)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 63, in get_headers
+    srv = service()
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 37, in service
+    return build("sheets", "v4", credentials=_creds(), cache_discovery=False)
+                                             ~~~~~~^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 32, in _creds
+    info = _load_sa_info()
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 29, in _load_sa_info
+    raise RuntimeError("Service Account bilgisi bulunamadı. .env ayarlarını kontrol et.")
+RuntimeError: Service Account bilgisi bulunamadı. .env ayarlarını kontrol et.
+C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py changed, reloading.
+Watching for file changes with StatReloader
+Session data corrupted
+SHEETS -> create çağrılıyor: 0803C3FF8606
+Sheet create failed
+Traceback (most recent call last):
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\views.py", line 141, in request_create
+    resp = _sheet_create(ticket)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\views.py", line 37, in _sheet_create
+    return _gs.upsert_ticket(ticket)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 167, in upsert_ticket
+    return upsert_by_tracking(_tickets_sheet(), ticket_to_dict(ticket))
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 88, in upsert_by_tracking
+    headers = get_headers(sheet_name)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 65, in get_headers
+    spreadsheetId=_ssid(),
+                  ~~~~~^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 42, in _ssid
+    raise RuntimeError("GOOGLE_SHEETS_SPREADSHEET_ID tanımsız!")
+RuntimeError: GOOGLE_SHEETS_SPREADSHEET_ID tanımsız!
+C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py changed, reloading.
+Watching for file changes with StatReloader
+Session data corrupted
+SHEETS -> create çağrılıyor: 27F631D96718
+SHEETS -> yanıt: {'spreadsheetId': '1EP7Uzn2R_BdX9ZGRCI-oWRhKMjy5ZoLR1Nwr8LOjAAY', 'tableRange': 'Tickets!A1:V7', 'updates': {'spreadsheetId': '1EP7Uzn2R_BdX9ZGRCI-oWRhKMjy5ZoLR1Nwr8LOjAAY', 'updatedRange': 'Tickets!A8:V8', 'updatedRows': 1, 'updatedColumns': 22, 'updatedCells': 22}}
+C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Session data corrupted
+SHEETS -> create çağrılıyor: E47F40DB4709
+Sheet create failed
+Traceback (most recent call last):
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\views.py", line 141, in request_create
+    resp = _sheet_create(ticket)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\views.py", line 37, in _sheet_create
+    return _gs.upsert_ticket(ticket)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 160, in upsert_ticket
+    return upsert_by_tracking(_tickets_sheet(), ticket_to_dict(ticket))
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 88, in upsert_by_tracking
+    headers = get_headers(sheet_name)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 65, in get_headers
+    srv = service()
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 42, in service
+    return build("sheets", "v4", credentials=_creds(), cache_discovery=False)
+                                             ~~~~~~^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 38, in _creds
+    info = _load_sa_info()
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 35, in _load_sa_info
+    raise RuntimeError("Service Account bilgisi bulunamadı. .env ayarlarını kontrol et.")
+RuntimeError: Service Account bilgisi bulunamadı. .env ayarlarını kontrol et.
+C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py changed, reloading.
+Watching for file changes with StatReloader
+Session data corrupted
+SHEETS -> create çağrılıyor: 8C855FCF7CE2
+Sheet create failed
+Traceback (most recent call last):
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\views.py", line 141, in request_create
+    resp = _sheet_create(ticket)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\views.py", line 37, in _sheet_create
+    return _gs.upsert_ticket(ticket)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 155, in upsert_ticket
+    return upsert_by_tracking(_tickets_sheet(), ticket_to_dict(ticket))
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 85, in upsert_by_tracking
+    headers = get_headers(sheet_name)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 63, in get_headers
+    srv = service()
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 41, in service
+    return build("sheets", "v4", credentials=_creds(), cache_discovery=False)
+                                             ~~~~~~^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 37, in _creds
+    info = _load_sa_info()
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\tickets\gsheets.py", line 34, in _load_sa_info
+    raise RuntimeError("Service Account bilgisi bulunamadı. .env ayarlarını kontrol et.")
+RuntimeError: Service Account bilgisi bulunamadı. .env ayarlarını kontrol et.
+Watching for file changes with StatReloader
+Session data corrupted
+SHEETS -> create çağrılıyor: 3B7D1D919B41
+SHEETS -> yanıt: {'spreadsheetId': '1EP7Uzn2R_BdX9ZGRCI-oWRhKMjy5ZoLR1Nwr8LOjAAY', 'tableRange': 'Tickets!A1:V8', 'updates': {'spreadsheetId': '1EP7Uzn2R_BdX9ZGRCI-oWRhKMjy5ZoLR1Nwr8LOjAAY', 'updatedRange': 'Tickets!A9:V9', 'updatedRows': 1, 'updatedColumns': 22, 'updatedCells': 22}}
+Session data corrupted
+Internal Server Error: /admin/
+Traceback (most recent call last):
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\urls\base.py", line 81, in reverse
+    extra, resolver = resolver.namespace_dict[ns]
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^
+KeyError: 'admin'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\contrib\admin\sites.py", line 265, in wrapper
+    return self.admin_view(view, cacheable)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\contrib\admin\sites.py", line 235, in inner
+    if request.path == reverse("admin:logout", current_app=self.name):
+                       ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\urls\base.py", line 92, in reverse
+    raise NoReverseMatch("%s is not a registered namespace" % key)
+django.urls.exceptions.NoReverseMatch: 'admin' is not a registered namespace
+Not Found: /accounts/admin
+Session data corrupted
+Internal Server Error: /admin/
+Traceback (most recent call last):
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\urls\base.py", line 81, in reverse
+    extra, resolver = resolver.namespace_dict[ns]
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^
+KeyError: 'admin'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\contrib\admin\sites.py", line 265, in wrapper
+    return self.admin_view(view, cacheable)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\contrib\admin\sites.py", line 235, in inner
+    if request.path == reverse("admin:logout", current_app=self.name):
+                       ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\urls\base.py", line 92, in reverse
+    raise NoReverseMatch("%s is not a registered namespace" % key)
+django.urls.exceptions.NoReverseMatch: 'admin' is not a registered namespace
+Session data corrupted
+Internal Server Error: /admin/
+Traceback (most recent call last):
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\urls\base.py", line 81, in reverse
+    extra, resolver = resolver.namespace_dict[ns]
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^
+KeyError: 'admin'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\contrib\admin\sites.py", line 265, in wrapper
+    return self.admin_view(view, cacheable)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\contrib\admin\sites.py", line 235, in inner
+    if request.path == reverse("admin:logout", current_app=self.name):
+                       ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\urls\base.py", line 92, in reverse
+    raise NoReverseMatch("%s is not a registered namespace" % key)
+django.urls.exceptions.NoReverseMatch: 'admin' is not a registered namespace
+Not Found: /tickets/admin/
+Session data corrupted
+Internal Server Error: /admin/
+Traceback (most recent call last):
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\urls\base.py", line 81, in reverse
+    extra, resolver = resolver.namespace_dict[ns]
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^
+KeyError: 'admin'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\contrib\admin\sites.py", line 265, in wrapper
+    return self.admin_view(view, cacheable)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\contrib\admin\sites.py", line 235, in inner
+    if request.path == reverse("admin:logout", current_app=self.name):
+                       ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\urls\base.py", line 92, in reverse
+    raise NoReverseMatch("%s is not a registered namespace" % key)
+django.urls.exceptions.NoReverseMatch: 'admin' is not a registered namespace
+Session data corrupted
+Internal Server Error: /admin/
+Traceback (most recent call last):
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\urls\base.py", line 81, in reverse
+    extra, resolver = resolver.namespace_dict[ns]
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^
+KeyError: 'admin'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\contrib\admin\sites.py", line 265, in wrapper
+    return self.admin_view(view, cacheable)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\contrib\admin\sites.py", line 235, in inner
+    if request.path == reverse("admin:logout", current_app=self.name):
+                       ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\urls\base.py", line 92, in reverse
+    raise NoReverseMatch("%s is not a registered namespace" % key)
+django.urls.exceptions.NoReverseMatch: 'admin' is not a registered namespace
+C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\t3ticket\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /tickets/admi
+Session data corrupted
+Internal Server Error: /tickets/admin/
+Traceback (most recent call last):
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\urls\base.py", line 81, in reverse
+    extra, resolver = resolver.namespace_dict[ns]
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^
+KeyError: 'admin'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\contrib\admin\sites.py", line 265, in wrapper
+    return self.admin_view(view, cacheable)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\contrib\admin\sites.py", line 235, in inner
+    if request.path == reverse("admin:logout", current_app=self.name):
+                       ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\.venv\Lib\site-packages\django\urls\base.py", line 92, in reverse
+    raise NoReverseMatch("%s is not a registered namespace" % key)
+django.urls.exceptions.NoReverseMatch: 'admin' is not a registered namespace
+C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\t3ticket\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Session data corrupted
+Session data corrupted
+C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\t3ticket\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\t3ticket\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Not Found: /favicon.ico
+C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\t3ticket\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\t3ticket\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\t3ticket\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+C:\Users\T3 Vakfı\Desktop\t3ticketing-apps-script-ready\t3ticketing\t3ticket\settings.py changed, reloading.

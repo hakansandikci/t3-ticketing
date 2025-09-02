@@ -1,0 +1,234 @@
+{% extends "base.html" %}
+{% block title %}Kayıt Güncelle{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto">
+  <!-- Başlık -->
+  <div class="mb-6">
+    <h1 class="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-red-600 via-orange-500 to-yellow-400 bg-clip-text text-transparent">
+      🛠️ Kayıt Güncelle
+    </h1>
+    <p class="text-sm text-gray-600 mt-1">
+      <b>“Bilet Alındı”</b> durumunda <b>PNR zorunlu</b>, <b>“Bilet Reddedildi”</b> durumunda <b>ret açıklaması zorunlu</b>dur.
+      Nadiren bilet farklı tarih/rotadan alınabiliyorsa, aşağıdaki <b>opsiyonel</b> alanları güncelleyebilirsiniz.
+    </p>
+  </div>
+
+  <!-- Özet Kart -->
+  <div class="bg-white/90 backdrop-blur rounded-2xl shadow-xl border border-gray-200 p-5 mb-6">
+    <div class="grid sm:grid-cols-2 gap-4 text-sm">
+      <div><span class="text-gray-500">Takip Kodu:</span> <span class="font-mono font-semibold">{{ ticket.tracking_code }}</span></div>
+      <div><span class="text-gray-500">Ad Soyad:</span> <span class="font-medium">{{ ticket.full_name }}</span></div>
+      <div><span class="text-gray-500">Rota:</span> <span class="font-medium">{{ ticket.origin }} → {{ ticket.destination }}</span></div>
+      <div><span class="text-gray-500">Tarih:</span> <span class="font-medium">{{ ticket.travel_date }}</span></div>
+    </div>
+
+    <div class="flex flex-wrap gap-2 mt-4">
+      <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-100">
+        Tür: {{ ticket.get_user_type_display }}
+      </span>
+      <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-100">
+        Ulaşım: {{ ticket.get_transport_display }}
+      </span>
+      <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-green-50 text-green-700 border border-green-100">
+        Mevcut Durum: {{ ticket.get_status_display }}
+      </span>
+      {% if ticket.purchased_by %}
+      <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-50 text-slate-700 border border-slate-100">
+        Alan: {% firstof ticket.purchased_by.get_full_name ticket.purchased_by.username %}
+      </span>
+      {% endif %}
+      {% if ticket.rejected_by %}
+      <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-red-50 text-red-700 border border-red-100">
+        Reddeden: {% firstof ticket.rejected_by.get_full_name ticket.rejected_by.username %}
+      </span>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Form -->
+  <div class="bg-white/90 backdrop-blur rounded-2xl shadow-xl border border-gray-200 p-6 animate-fadeIn">
+    <form method="post" class="space-y-6" id="editForm">
+      {% csrf_token %}
+
+      <!-- Durum / PNR / Red -->
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="form-label" for="status">Durum</label>
+          <select id="status" name="status" class="form-select">
+            {% with st=posted_status|default:ticket.status %}
+              <option value="pending"  {% if st == "pending" %}selected{% endif %}>Beklemede</option>
+              <option value="ticketed" {% if st == "ticketed" %}selected{% endif %}>Bilet Alındı</option>
+              <option value="rejected" {% if st == "rejected" %}selected{% endif %}>Bilet Reddedildi</option>
+            {% endwith %}
+          </select>
+        </div>
+
+        <div>
+          <label class="form-label" for="pnr_code">PNR</label>
+          <input id="pnr_code" name="pnr_code"
+                 value="{% if posted_pnr is not None %}{{ posted_pnr }}{% else %}{{ ticket.pnr_code|default_if_none:'' }}{% endif %}"
+                 class="form-input" placeholder="PNR numarası">
+          <p id="pnrHelp" class="text-xs mt-1 text-gray-500">“Bilet Alındı” durumunda PNR zorunludur.</p>
+        </div>
+      </div>
+
+      <!-- PNR uyarı -->
+      <div id="pnrWarn" class="hidden text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg p-3">
+        Lütfen PNR girin: Bilet <b>Alındı</b> konumunda PNR olmadan kaydedemezsiniz.
+      </div>
+
+      <!-- RED AÇIKLAMA (yalnızca rejected) -->
+      <div id="rejectionBox" class="hidden">
+        <label class="form-label" for="rejection_reason">Red Talebi / Açıklama</label>
+        <textarea id="rejection_reason" name="rejection_reason" rows="3" class="form-input"
+                  placeholder="Neden reddedildi? (zorunlu)">{% if posted_rejection_reason is not None %}{{ posted_rejection_reason }}{% else %}{{ ticket.rejection_reason|default_if_none:'' }}{% endif %}</textarea>
+        <p class="text-xs mt-1 text-gray-500">Reddedildi durumunda açıklama zorunludur; kullanıcı durum sorgulamada görüntüler.</p>
+      </div>
+
+      <!-- Opsiyonel: Yeni Rota / Tarih -->
+      <div class="pt-2">
+        <h3 class="text-sm font-semibold text-gray-700 mb-3">Opsiyonel Rota / Tarih Güncellemesi</h3>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div>
+            <label class="form-label" for="travel_date">Yeni Tarih (opsiyonel)</label>
+            <input type="date" id="travel_date" name="travel_date"
+                   class="form-input" value="{{ ticket.travel_date|date:'Y-m-d' }}">
+          </div>
+          <div>
+            <label class="form-label" for="origin">Yeni Kalkış (opsiyonel)</label>
+            <input id="origin" name="origin" class="form-input" value="{{ ticket.origin }}" placeholder="Örn: İstanbul">
+          </div>
+          <div>
+            <label class="form-label" for="destination">Yeni Varış (opsiyonel)</label>
+            <input id="destination" name="destination" class="form-input" value="{{ ticket.destination }}" placeholder="Örn: Ankara">
+          </div>
+        </div>
+        <p class="text-xs text-gray-500 mt-2">Bu alanlar yalnızca farklı bir tarih veya rotadan bilet aldıysanız güncellenmelidir.</p>
+      </div>
+
+      <!-- Butonlar -->
+      <div class="flex items-center justify-end gap-2 pt-2">
+        <a href="{% url 'tickets:staff_dashboard' %}" class="btn-secondary">İptal</a>
+        <button type="submit" id="saveBtn" class="btn-primary">Kaydet</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Stil -->
+<style>
+  @keyframes fadeIn { from {opacity:0; transform: translateY(10px);} to {opacity:1; transform:none;} }
+  .animate-fadeIn { animation: fadeIn .28s ease-out; }
+
+  .form-label { display:block; margin-bottom:.35rem; font-size:.92rem; font-weight:600; color:#374151; }
+  .form-input, .form-select {
+    width:100%; border:1px solid #d1d5db; border-radius:.75rem; padding:.65rem .85rem;
+    background:#fff; outline:none; transition: border-color .2s, box-shadow .2s; font-size:.95rem;
+  }
+  .form-input:focus, .form-select:focus { border-color:#ef4444; box-shadow:0 0 0 4px rgba(239,68,68,.18); }
+
+  .btn-primary {
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:.75rem 1.25rem; border-radius:.8rem; color:#fff; font-weight:700;
+    background-image:linear-gradient(90deg, #dc2626 0%, #f97316 55%, #f59e0b 100%);
+    box-shadow:0 10px 20px rgba(249,115,22,.25);
+    transition: transform .12s ease, filter .2s ease;
+  }
+  .btn-primary:hover { transform: translateY(-1px) scale(1.015); filter:brightness(1.02); }
+  .btn-secondary {
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:.7rem 1.1rem; border:1px solid #e5e7eb; border-radius:.8rem;
+    background:#f3f4f6; color:#374151; font-weight:600; transition: background .2s, color .2s, border-color .2s;
+  }
+  .btn-secondary:hover { background:#eef1f5; }
+  .error-border { border-color:#dc2626 !important; box-shadow:0 0 0 3px rgba(220,38,38,.18) !important; }
+</style>
+
+<!-- JS (tek, temiz) -->
+<script>
+  (function(){
+    const statusSel = document.getElementById('status');
+    const pnr = document.getElementById('pnr_code');
+    const warn = document.getElementById('pnrWarn');
+    const saveBtn = document.getElementById('saveBtn');
+    const form = document.getElementById('editForm');
+
+    const rejectionBox = document.getElementById('rejectionBox');
+    const rejectionReason = document.getElementById('rejection_reason');
+
+    function normalizePNR(){
+      if (!pnr) return;
+      const cur = pnr.value || '';
+      pnr.value = cur.replace(/\s+/g, '').toUpperCase();
+    }
+
+    function enforceRule(){
+      const st = statusSel.value;
+      const needsPNR = st === 'ticketed';
+      const isRejected = st === 'rejected';
+
+      // Rejected alanı
+      if (isRejected) {
+        rejectionBox.classList.remove('hidden');
+        rejectionReason.setAttribute('required','required');
+        // PNR devre dışı
+        if (pnr) {
+          pnr.value = '';
+          pnr.setAttribute('disabled','disabled');
+          pnr.removeAttribute('required');
+        }
+      } else {
+        rejectionBox.classList.add('hidden');
+        rejectionReason.removeAttribute('required');
+        if (pnr) pnr.removeAttribute('disabled');
+      }
+
+      // PNR zorunluluğu
+      let disable = false;
+      if (needsPNR && pnr) {
+        pnr.setAttribute('required','required');
+        if (!pnr.value.trim()) {
+          warn && warn.classList.remove('hidden');
+          pnr.classList.add('error-border');
+          disable = true;
+        } else {
+          warn && warn.classList.add('hidden');
+          pnr.classList.remove('error-border');
+        }
+      } else {
+        if (pnr) {
+          pnr.removeAttribute('required');
+          pnr.classList.remove('error-border');
+        }
+        warn && warn.classList.add('hidden');
+      }
+
+      // Rejected ise açıklama zorunlu
+      if (isRejected && !rejectionReason.value.trim()) {
+        disable = true;
+      }
+
+      saveBtn.disabled = disable;
+      saveBtn.classList.toggle('opacity-70', disable);
+      saveBtn.classList.toggle('cursor-not-allowed', disable);
+    }
+
+    function recheck(){
+      normalizePNR();
+      enforceRule();
+    }
+
+    // init
+    recheck();
+    statusSel.addEventListener('change', recheck);
+    if (pnr) pnr.addEventListener('input', recheck);
+    if (rejectionReason) rejectionReason.addEventListener('input', recheck);
+
+    form.addEventListener('submit', (e) => {
+      recheck();
+      if (saveBtn.disabled) e.preventDefault();
+    });
+  })();
+</script>
+{% endblock %}
