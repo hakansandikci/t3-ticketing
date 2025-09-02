@@ -4,7 +4,7 @@ import json
 import logging
 from decimal import Decimal
 from django.conf import settings
-
+import base64
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
 
@@ -43,6 +43,12 @@ HEADERS = [
 
 def _creds():
     """Service Account cred'lerini hem FILE hem INFO'dan destekle."""
+    if getattr(settings, "GOOGLE_SERVICE_ACCOUNT_INFO_B64", "").strip():
+        info_b64 = settings.GOOGLE_SERVICE_ACCOUNT_INFO_B64.strip()
+        info = json.loads(base64.b64decode(info_b64).decode("utf-8"))
+        print(info)
+        return Credentials.from_service_account_info(info, scopes=SCOPES)
+
     if getattr(settings, "GOOGLE_SERVICE_ACCOUNT_FILE", ""):
         return Credentials.from_service_account_file(
             settings.GOOGLE_SERVICE_ACCOUNT_FILE, scopes=SCOPES
