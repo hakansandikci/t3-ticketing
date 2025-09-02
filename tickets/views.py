@@ -21,12 +21,12 @@ logger = logging.getLogger(__name__)
 _gs = None
 _apps = None
 try:
-    from . import gsheets as _gs  # Service Account tabanlı
+    from tickets import gsheets as _gs  # Service Account tabanlı
 except Exception:
     _gs = None
 
 try:
-    from . import sheets_api as _apps  # Apps Script WebApp tabanlı
+    from tickets import sheets_api as _apps  # Apps Script WebApp tabanlı
 except Exception:
     _apps = None
 
