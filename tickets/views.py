@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 _gs = None
 _apps = None
 try:
-    import gsheets as _gs  # Service Account tabanlı
+    from tickets import gsheets as _gs  # Service Account tabanlı
 except Exception:
     _gs = None
 
