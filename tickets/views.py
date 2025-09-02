@@ -28,7 +28,7 @@ except Exception as e:
 
 
 try:
-    import sheets_api as _apps
+    from tickets import sheets_api as _apps
 except Exception as e:
     print("Apps import error:", e)
     _apps = None
