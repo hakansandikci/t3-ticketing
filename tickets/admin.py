@@ -2,7 +2,10 @@
 from django.contrib import admin, messages
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
-from .models import TicketRequest, ChangeRequest
+from .models import TicketRequest, ChangeRequest, Option
+from django import admin
+
+
 
 
 class ChangeRequestInline(admin.TabularInline):
@@ -11,6 +14,11 @@ class ChangeRequestInline(admin.TabularInline):
     readonly_fields = ("reason", "created_at")
     can_delete = False
 
+class OptionAdmin(admin.ModelAdmin):
+    list_display = ("group", "label", "value", "active", "ordering")
+    list_filter  = ("group", "active")
+    search_fields = ("label", "value")
+    ordering = ("group", "ordering", "label")
 
 @admin.register(TicketRequest)
 class TicketRequestAdmin(admin.ModelAdmin):
@@ -37,6 +45,8 @@ class TicketRequestAdmin(admin.ModelAdmin):
     search_fields = (
         "tracking_code",
         "full_name",
+        "email",
+        "birdth_date",
         "tc_no",
         "phone",
         "origin",
