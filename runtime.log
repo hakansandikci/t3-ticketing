@@ -631,3 +631,72 @@ Traceback (most recent call last):
     return super().execute(query, params)
            ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
 django.db.utils.OperationalError: no such column: tickets_ticketrequest.email
+Watching for file changes with StatReloader
+Internal Server Error: /talep-yeni/
+Traceback (most recent call last):
+  File "C:\Users\T3 Vakfı\t3-ticketing\.venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\T3 Vakfı\t3-ticketing\.venv\Lib\site-packages\psycopg\cursor.py", line 97, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedTable: relation "tickets_option" does not exist
+LINE 1: ...option"."category", "tickets_option"."value" FROM "tickets_o...
+                                                             ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\T3 Vakfı\t3-ticketing\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\T3 Vakfı\t3-ticketing\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\T3 Vakfı\t3-ticketing\tickets\views.py", line 166, in request_create
+    form = TicketRequestForm()
+  File "C:\Users\T3 Vakfı\t3-ticketing\tickets\forms.py", line 46, in __init__
+    choices=[(o.value, o.value) for o in Option.objects.filter(category="user_type")]
+                                         ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T3 Vakfı\t3-ticketing\.venv\Lib\site-packages\django\db\models\query.py", line 384, in __iter__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\T3 Vakfı\t3-ticketing\.venv\Lib\site-packages\django\db\models\query.py", line 1949, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T3 Vakfı\t3-ticketing\.venv\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+        chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size
+    )
+  File "C:\Users\T3 Vakfı\t3-ticketing\.venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1623, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\T3 Vakfı\t3-ticketing\.venv\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\T3 Vakfı\t3-ticketing\.venv\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\T3 Vakfı\t3-ticketing\.venv\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\T3 Vakfı\t3-ticketing\.venv\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T3 Vakfı\t3-ticketing\.venv\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\T3 Vakfı\t3-ticketing\.venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\T3 Vakfı\t3-ticketing\.venv\Lib\site-packages\psycopg\cursor.py", line 97, in execute
+    raise ex.with_traceback(None)
+django.db.utils.ProgrammingError: relation "tickets_option" does not exist
+LINE 1: ...option"."category", "tickets_option"."value" FROM "tickets_o...
+                                                             ^
+Watching for file changes with StatReloader
+C:\Users\T3 Vakfı\t3-ticketing\tickets\admin.py changed, reloading.
+Watching for file changes with StatReloader
+SHEETS -> create çağrılıyor: D534A8ED894D
+Sheet backend bulunamadı (gsheets/sheets_api yok).
+SHEETS -> yanıt: None
+Sheet backend bulunamadı (gsheets/sheets_api yok).

@@ -116,11 +116,14 @@ WSGI_APPLICATION = "t3ticket.wsgi.application"
 # Veritabanı
 # -----------------------------
 DATABASES = {
-    'default': dj_database_url.config(
-        default="postgresql://t3ticket_db_user:rVVf6VyWtaPCgQpsrTdmmDBc7t2Pehwz@dpg-d2red2mr433s73fi2l3g-a.oregon-postgres.render.com/t3ticket_db",
-        conn_max_age=600,
-        ssl_require=True
-    )
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "t3",
+        "USER": "myuser",
+        "PASSWORD": "strong_password",
+        "HOST": "localhost",
+        "PORT": "5432",
+    }
 }
 
 # -----------------------------

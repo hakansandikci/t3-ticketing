@@ -56,7 +56,8 @@ class TicketRequest(models.Model):
         validators=[RegexValidator(r"^\d{3}-\d{3}-\d{2}-\d{2}$", "Telefon formatı 5xx-xxx-xx-xx olmalı.")],
     )
     email = models.EmailField()  # yeni
-    birth_date = models.DateField()  # yeni
+    birth_date = models.DateField(null=True, blank=True)
+
 
     # Gidiş
     origin = models.CharField(max_length=100)

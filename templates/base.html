@@ -6,11 +6,26 @@
   <title>{% block title %}TSV Bilet Sistemi{% endblock %}</title>
   <!-- Tailwind via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="min-h-screen flex flex-col bg-gradient-to-br from-red-50 via-orange-50 to-yellow-50 text-gray-900">
 
-  <!-- Navbar (TEK) -->
-  <nav class="bg-gradient-to-r from-red-600 via-orange-500 to-yellow-400 text-white shadow-md sticky top-0 z-10">
+  <!-- Tema renkleri (tek mavi ton) -->
+  <style>
+    :root{
+      --brand-blue: #1EA7FF;   /* header/footer ve buton ana rengi */
+      --brand-blue-700:#1695E5; /* hover koyusu */
+    }
+    .site-header{ background-color: var(--brand-blue) !important; color:#fff; }
+    .site-header a{ color:#fff !important; }
+    .site-footer{ background-color: var(--brand-blue) !important; color:#fff; }
+
+    /* İsteğe bağlı: sayfa genel butonları */
+    .btn-primary{ background: var(--brand-blue); color:#fff; }
+    .btn-primary:hover{ background: var(--brand-blue-700); }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-gray-50 text-gray-900">
+
+  <!-- Navbar -->
+  <nav class="site-header shadow-md sticky top-0 z-10">
     <div class="max-w-6xl mx-auto px-4">
       <div class="flex items-center justify-between py-3">
         <!-- Logo -->
@@ -18,13 +33,10 @@
           🎫 Bilet Sistemi
         </a>
 
-        <!-- Desktop links -->
+        <!-- Desktop links (Personel Paneli kaldırıldı) -->
         <div class="hidden md:flex items-center gap-6">
           <a class="text-sm hover:underline" href="/talep-yeni/">Talep Oluştur</a>
           <a class="text-sm hover:underline" href="/durum/">Durum Sorgula</a>
-          <a class="text-sm hover:underline" href="/panel/">Personel Paneli</a>
-
-          
         </div>
 
         <!-- Mobile menu button -->
@@ -38,7 +50,6 @@
         <div class="flex flex-col gap-2">
           <a class="text-sm hover:underline px-2 py-1" href="/talep-yeni/">Talep Oluştur</a>
           <a class="text-sm hover:underline px-2 py-1" href="/durum/">Durum Sorgula</a>
-          <a class="text-sm hover:underline px-2 py-1" href="/panel/">Personel Paneli</a>
           <div class="px-2 pt-1">
             {% if user.is_authenticated %}
               <form method="post" action="{% url 'logout' %}" class="inline">
@@ -64,14 +75,9 @@
       <div class="space-y-3 mb-6">
         {% for m in messages %}
           <div class="p-4 rounded-xl border shadow-sm
-            {% if m.tags == 'success' %}
-              bg-green-50 border-green-300 text-green-800
-            {% elif m.tags == 'error' %}
-              bg-red-50 border-red-300 text-red-800
-            {% else %}
-              bg-yellow-50 border-yellow-300 text-yellow-800
-            {% endif %}
-          ">
+            {% if m.tags == 'success' %} bg-green-50 border-green-300 text-green-800
+            {% elif m.tags == 'error' %} bg-red-50 border-red-300 text-red-800
+            {% else %} bg-yellow-50 border-yellow-300 text-yellow-800 {% endif %}">
             {{ m }}
           </div>
         {% endfor %}
@@ -81,7 +87,7 @@
   </main>
 
   <!-- Footer -->
-  <footer class="bg-gradient-to-r from-red-600 via-orange-500 to-yellow-400 text-white text-center py-6 mt-10 shadow-inner">
+  <footer class="site-footer text-center py-6 mt-10 shadow-inner">
     <p class="text-sm">© 2025 T3 Vakfı - Bilet Yönetim Sistemi</p>
   </footer>
 
@@ -91,9 +97,7 @@
       const btn = document.getElementById('navToggle');
       const menu = document.getElementById('mobileMenu');
       if (!btn || !menu) return;
-      btn.addEventListener('click', () => {
-        menu.classList.toggle('hidden');
-      });
+      btn.addEventListener('click', () => menu.classList.toggle('hidden'));
     })();
   </script>
 </body>
