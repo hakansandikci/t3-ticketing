@@ -21,9 +21,15 @@
 
       <!-- Trip type -->
       <div class="md:col-span-2">
-        <label class="form-label">Seyahat Tipi</label>
-        {{ form.trip_type }}
-        {% if form.trip_type.errors %}<p class="form-error">{{ form.trip_type.errors|join:", " }}</p>{% endif %}
+        <div id="tripTypeBox" class="rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
+          <div class="text-sm font-semibold text-gray-700 mb-2">Seyahat Tipi</div>
+          <div class="flex items-center gap-8">
+            {{ form.trip_type }}
+          </div>
+          <p class="text-xs text-gray-500 mt-2">
+            “Gidiş-Dönüş” seçerseniz dönüş alanları otomatik açılır.
+          </p>
+        </div>
       </div>
 
       <!-- Kullanıcı türü -->
@@ -173,13 +179,18 @@
       <h2 class="text-2xl font-bold text-green-600 mb-3">✅ Talep Alındı</h2>
       <p class="text-gray-700 mb-2">Takip Kodunuz:</p>
 
-      <div class="flex items-center justify-between bg-gray-100 border rounded-lg px-4 py-2 mb-4">
-        <code id="trackingCode" class="font-mono text-lg text-gray-800">{{ tracking_code }}</code>
-        <button type="button" onclick="copyCode()" 
-          class="ml-3 px-3 py-1.5 rounded bg-primary-600 text-white text-sm hover:bg-primary-700 transition">
-          Kopyala
-        </button>
-      </div>
+     <button type="button" onclick="copyCode()" class="w-full text-left group">
+        <div class="flex items-center justify-between bg-gray-100 hover:bg-gray-200 border rounded-xl px-4 py-3 transition shadow-sm">
+          <code id="trackingCode" class="font-mono text-lg text-gray-800">{{ tracking_code }}</code>
+          <span class="ml-3 inline-flex items-center px-3 py-1.5 rounded-lg bg-blue-600 text-white text-sm
+                   group-hover:bg-blue-700 transition">
+            Kopyala
+          </span>
+        </div>
+      </button>
+      <p class="text-xs text-gray-500 mt-3">
+        Kutunun herhangi bir yerine tıklayarak kopyalayabilirsiniz.
+      </p>
 
       <p class="text-sm text-gray-700 mb-6">
         ⚠️ <b>Önemli:</b> Bu kodla talebinizin durumunu görüntülersiniz. Lütfen <b>kopyalayın</b> ve <b>kaydedin</b>.
@@ -329,4 +340,33 @@
     if (modal) modal.remove();
   }
 </script>
+
+<script>
+  (function () {
+    const roundRadios = document.querySelectorAll('input[name="{{ form.trip_type.name }}"]');
+    const toggle = () => {
+      const val = document.querySelector('input[name="{{ form.trip_type.name }}"]:checked')?.value;
+      const show = (val === 'roundtrip');
+      ['{{ form.return_destination.id_for_label }}','{{ form.return_date.id_for_label }}','{{ form.return_time.id_for_label }}']
+        .forEach(id => {
+          const field = document.getElementById(id)?.closest('.flex') || document.getElementById(id)?.closest('.flex-col');
+          if(field) field.classList.toggle('hidden', !show);
+        });
+    };
+    roundRadios.forEach(r => r.addEventListener('change', toggle));
+    toggle();
+  })();
+</script>
+
+<script>
+  function copyCode() {
+    const text = document.getElementById("trackingCode")?.textContent?.trim();
+    if(!text) return;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = event?.currentTarget?.querySelector('span');
+      if(btn){ btn.textContent = 'Kopyalandı ✓'; setTimeout(()=>btn.textContent='Kopyala', 1600); }
+    });
+  }
+</script>
 {% endblock %}
+

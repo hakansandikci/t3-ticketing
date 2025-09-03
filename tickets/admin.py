@@ -20,6 +20,12 @@ class OptionAdmin(admin.ModelAdmin):
     search_fields = ("label", "value")
     ordering = ("group", "ordering", "label")
 
+@admin.register(Option)
+class OptionAdmin(admin.ModelAdmin):
+    list_display = ("category", "value")
+    list_filter = ("category",)
+    search_fields = ("value",)
+
 @admin.register(TicketRequest)
 class TicketRequestAdmin(admin.ModelAdmin):
     # Liste görünümü
