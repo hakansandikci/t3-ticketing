@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="flex items-center justify-between mb-6">
-  <h1 class="text-3xl font-extrabold bg-gradient-to-r from-red-600 via-orange-500 to-yellow-400 bg-clip-text text-transparent">
+  <h1 class="text-3xl font-extrabold bg-gradient-to-r from-red-600 via-blue-500 to-yellow-400 bg-clip-text text-transparent">
     👨‍💻 Personel Paneli
   </h1>
   <div class="space-x-2">
     <a class="px-3 py-2 rounded-lg bg-green-600 text-white text-sm shadow hover:scale-105 transition" href="{% url 'tickets:export_csv' %}">CSV</a>
     <a class="px-3 py-2 rounded-lg bg-green-600 text-white text-sm shadow hover:scale-105 transition" href="{% url 'tickets:export_xlsx' %}">XLSX</a>
-    <a class="px-3 py-2 rounded-lg bg-orange-500 text-white text-sm shadow hover:scale-105 transition" href="{% url 'tickets:reports' %}">Raporlar</a>
+    <a class="px-3 py-2 rounded-lg bg-blue-500 text-white text-sm shadow hover:scale-105 transition" href="{% url 'tickets:reports' %}">Raporlar</a>
     <form method="post" action="{% url 'logout' %}" class="inline">
       {% csrf_token %}
       <button type="submit" class="px-3 py-2 rounded-lg bg-red-600 text-white text-sm shadow hover:scale-105 transition">
@@ -51,7 +51,7 @@
 
   <!-- Butonlar (sola hizalı) -->
   <div class="flex items-center gap-2 md:col-span-6">
-    <button class="px-4 py-2 rounded-lg bg-gradient-to-r from-red-600 via-orange-500 to-yellow-400 text-white font-medium shadow hover:scale-105 transition">
+    <button class="px-4 py-2 rounded-lg bg-gradient-to-r from-red-600 via-blue-500 to-yellow-400 text-white font-medium shadow hover:scale-105 transition">
       Filtrele
     </button>
     <a href="{% url 'tickets:staff_dashboard' %}"
@@ -64,7 +64,7 @@
 <!-- Tablo -->
 <div class="bg-white rounded-2xl shadow overflow-x-auto">
   <table class="min-w-full text-sm">
-    <thead class="bg-gradient-to-r from-red-600 via-orange-500 to-yellow-400 text-white">
+    <thead class="bg-gradient-to-r from-red-600 via-blue-500 to-yellow-400 text-white">
       <tr>
         <th class="text-left p-3">Kullanıcı</th>
         <th class="text-left p-3">Takip</th>
@@ -81,12 +81,12 @@
     </thead>
     <tbody>
       {% for t in tickets %}
-      <tr class="border-b hover:bg-orange-50 transition">
+      <tr class="border-b hover:bg-blue-50 transition">
         <!-- Kullanıcı (purchased_by) -->
         <td class="p-3">
           {% if t.purchased_by %}
             <div class="flex items-center gap-2">
-              <div class="w-7 h-7 rounded-full bg-orange-100 text-orange-700 flex items-center justify-center text-xs font-semibold">
+              <div class="w-7 h-7 rounded-full bg-blue-100 text-blue-flex items-center justify-center text-xs font-semibold">
                 {% firstof t.purchased_by.first_name|slice:":1" t.purchased_by.username|slice:":1" %}{% if t.purchased_by.last_name %}{{ t.purchased_by.last_name|slice:":1" }}{% endif %}
               </div>
               <div class="leading-tight">
