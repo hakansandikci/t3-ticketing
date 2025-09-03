@@ -3,7 +3,7 @@ from django.contrib import admin, messages
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from .models import TicketRequest, ChangeRequest, Option
-from django import admin
+from django.contrib import admin
 
 
 
