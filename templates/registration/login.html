@@ -5,7 +5,7 @@
 <div class="max-w-md mx-auto w-full">
   <!-- Başlık -->
   <div class="mb-6 text-center">
-    <h1 class="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-red-600 via-orange-500 to-yellow-400 bg-clip-text text-transparent">
+    <h1 class="text-3xl font-extrabold tracking-tight text-[#1994D6]">
       🔐 Personel Girişi
     </h1>
     <p class="text-sm text-gray-600 mt-1">Panel erişimi için kullanıcı adı ve şifrenizi giriniz.</p>
@@ -41,7 +41,6 @@
         {% if form.password.errors %}<p class="form-error">{{ form.password.errors|join:", " }}</p>{% endif %}
       </div>
 
-      <!-- next param (koru) -->
       {% if next %}
         <input type="hidden" name="next" value="{{ next }}">
       {% endif %}
@@ -50,7 +49,8 @@
       <div class="flex items-center justify-between pt-2">
         <a href="{% url 'password_reset' %}" class="text-sm text-gray-600 hover:underline">Şifremi Unuttum</a>
         <button type="submit"
-          class="px-5 py-2.5 rounded-lg bg-gradient-to-r from-red-600 via-orange-500 to-yellow-400 text-white font-semibold shadow hover:scale-105 transition">
+          class="px-5 py-2.5 rounded-lg text-white font-semibold shadow hover:scale-105 transition"
+          style="background:#1994D6;">
           Giriş Yap
         </button>
       </div>
@@ -63,27 +63,19 @@
   @keyframes fadeIn { from {opacity:0; transform: translateY(12px);} to {opacity:1; transform: translateY(0);} }
   .animate-fadeIn { animation: fadeIn .4s ease-out; }
 
-  .form-label {
-    display:block; margin-bottom:.35rem; font-size:.92rem; font-weight:600; color:#374151;
-  }
+  .form-label { display:block; margin-bottom:.35rem; font-size:.92rem; font-weight:600; color:#374151; }
   input[type="text"], input[type="password"] {
-    width:100%;
-    border:1px solid #d1d5db;
-    border-radius:.65rem;
-    padding:.6rem .8rem;
-    background:#fff;
-    outline:none;
-    transition:border-color .2s, box-shadow .2s;
-    font-size:.95rem;
+    width:100%; border:1px solid #d1d5db; border-radius:.65rem; padding:.6rem .8rem; background:#fff; outline:none;
+    transition:border-color .2s, box-shadow .2s; font-size:.95rem;
   }
   input[type="text"]:focus, input[type="password"]:focus {
-    border-color:#ef4444; /* red-500 */
-    box-shadow:0 0 0 4px rgba(239,68,68,.2);
+    border-color:#1994D6;
+    box-shadow:0 0 0 4px rgba(25,148,214,.20);
   }
   .form-error { margin-top:.35rem; font-size:.78rem; color:#dc2626; }
 </style>
 
-<!-- Küçük JS: Şifre göster/gizle -->
+<!-- Şifre göster/gizle -->
 <script>
   (function(){
     const btn = document.getElementById('togglePass');

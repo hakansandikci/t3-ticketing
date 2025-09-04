@@ -1,7 +1,6 @@
 from django import forms
 from .models import TicketRequest, ChangeRequest, Option
 
-
 class TicketRequestForm(forms.ModelForm):
     class Meta:
         model = TicketRequest
@@ -22,10 +21,12 @@ class TicketRequestForm(forms.ModelForm):
             "return_time",
             "reason",
             "reason_other",
-            "preferred_airline",
+            "preferred_airline",   # ✅ EKLENDİ
             "flight_number",
             "transport",
+            "notes",               # ✅ EKLENDİ
         ]
+
 
         widgets = {
             "trip_type": forms.RadioSelect,
